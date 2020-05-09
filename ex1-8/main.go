@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -17,6 +18,8 @@ func main() {
 		if err != nil {
 			log.Fatalf("fetch: %v\n", err)
 		}
+		fmt.Printf("Status: %s\n", resp.Status)
+		fmt.Println("Content:")
 		_, err = io.Copy(os.Stdout, resp.Body)
 		resp.Body.Close()
 		if err != nil {
