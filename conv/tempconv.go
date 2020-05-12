@@ -3,8 +3,8 @@
 
 //!+
 
-// Package tempconv performs Celsius and Fahrenheit conversions.
-package tempconv
+// Package conv performs Celsius and Fahrenheit conversions.
+package conv
 
 import "fmt"
 
