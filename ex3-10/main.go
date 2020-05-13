@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -14,15 +15,23 @@ func main() {
 
 func comma(s string) string {
 	var buf bytes.Buffer
-	n := len(s)
+	startPos := 0
+	if strings.HasPrefix(s, "-") {
+		buf.WriteByte('-')
+		startPos = 1
+	}
+	n := len(s) - startPos
 	if n <= 3 {
 		return s
 	}
 	steps := n / 3
-	buf.WriteString(s[:n-steps*3])
+	buf.WriteString(s[startPos : n-steps*3])
 	for i := steps; i > 0; i-- {
 		j := n - i*3
-		buf.WriteString("," + s[j:j+3])
+		if j != 0 {
+			buf.WriteByte(',')
+		}
+		buf.WriteString(s[j : j+3])
 	}
 	return buf.String()
 }
